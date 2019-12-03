@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% set active_page = "status" %}
+
+{% block content %}
+<div class="row">
+  <div class="col-10 offset-1">
+    <h1>Container Status</h1>
+    <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for container in containers %}
+      <tr>
+        <td>{{ container.name }}</td>
+        <td>{{ container.status }}</td>
+        <td>
+          <form method="POST" action="startContainer">
+            <input type="hidden" name="container" value="{{ container.name }}">
+            <input type="hidden" name="action" value="start">
+            <button class="btn btn-success">Start</button>
+          </form>
+        </td>
+        <td>
+          <form method="POST" action="stopContainer">
+            <input type="hidden" name="container" value="{{ container.name }}">
+            <input type="hidden" name="action" value="stop">
+            <button class="btn btn-danger">Stop</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+  
